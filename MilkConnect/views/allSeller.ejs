@@ -1,0 +1,26 @@
+<!-- views/sellersList.ejs -->
+<h1><%= title %></h1>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
+  <thead>
+    <tr>
+      <th>Seller Name</th>
+      <th>Business</th>
+      <th>Area</th>
+      <th>Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% sellers.forEach(seller => { %>
+      <tr>
+        <td><%= seller.sellerName %></td>
+        <td><%= seller.businessName %></td>
+        <td><%= seller.sellerArea %></td>
+        <td>
+          <%= seller.phnNumber %><br>
+          <%= seller.sellerMail %>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>

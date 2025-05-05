@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        form {
+            background-color: white;
+            border: 2px solid black;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+        }
+        
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Details</h1>
+    <form action="/api/v1/deleteSeller" method="POST">    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </form>
+</body>
+</html>
