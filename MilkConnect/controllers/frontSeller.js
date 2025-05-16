@@ -35,7 +35,7 @@ exports.deleteSeller = async(req,res)=>{
         let user = await sellerModel.findOne({sellerMail:email});
         if(user){
             await sellerModel.deleteOne({sellerMail:email});
-            const sellers =await sellerModel.find({});
+            const sellers = await sellerModel.find({});
             res.render('allSeller',{sellers,title:'All Sellers'});
         }
         else{

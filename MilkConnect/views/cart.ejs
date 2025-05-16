@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <!-- <th>Product Name</th> -->
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% cartItems.forEach(item => { %>
+                <tr>
+                    <td><%= item.productId %></td>
+                    <!-- <td><%= item.productName %></td> -->
+                    <td><%= item.quantity %></td>
+                    <td><%= item.totalPrice %></td>
+                    <td>
+                        <button onclick="removeFromCart('<%= item.productId %>')">Remove</button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+<script>
+    async function removeFromCart(productId){
+    try{
+      const response = await fetch('/api/v1/removeFromCart',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          productId: productId,
+        })
+      })
+      const result = await response.json();
+      if(result.success){
+        alert('Product removed from cart successfully');
+      } else {
+        alert('Product Reomved from cart');
+      }
+    }
+    catch(error){
+      console.error('Error:', error);
+      alert('An error occurred while removing the product from the cart');
+    }
+  }
+</script>
+</html>

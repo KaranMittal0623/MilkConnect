@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Exp. Date</th>
+        <th>Price</th>
+        <th>Action<th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(product => { %>
+        <tr>
+          <td><%= product.productId %></td>
+          <td><%= product.productName %></td>
+          <td><%= product.expDate %></td>
+          <td><%= product.productPrice %></td>
+          <td style="display: flex;">
+            <button onclick="addToCart('<%= product.productId %>','<%= product.productName %>','<%= product.productPrice %>')">Add</button>
+            <button style="margin-left: 5%;" onclick="removeFromCart('<%= product.productId %>')">Remove</button>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <div style="display: flex; justify-content: center; margin-top: 20px;">
+    <!-- <button >Show Cart</button> -->
+     <a href="/api/v1/cart">Show Cart</a>
+  </div>
+</body>
+</html>
+  
+
+<script>
+  async function addToCart(productId,productName, productPrice){
+    try{
+      const response = await fetch('/api/v1/addToCart',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          productId: productId,
+          productName: productName,
+          productPrice: productPrice
+        })
+      })
+      const result = await response.json();
+      if(result.success){
+        alert('Product added to cart successfully');
+      } else {
+        alert('Failed to add product to cart');
+      }
+    }
+    catch(error){
+      console.error('Error:', error);
+      alert('An error occurred while adding the product to the cart');
+    }
+  }
+
+
+
+  async function removeFromCart(productId){
+    try{
+      const response = await fetch('/api/v1/removeFromCart',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          productId: productId,
+        })
+      })
+      const result = await response.json();
+      if(result.success){
+        alert('Product removed from cart successfully');
+      } else {
+        alert('Failed to remove product from cart');
+      }
+    }
+    catch(error){
+      console.error('Error:', error);
+      alert('An error occurred while removing the product from the cart');
+    }
+  }
+
+
+  async function showCart(){
+    try{
+      const response = await fetch('/api/v1/cart',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json();
+      if(result.success){
+        alert('Cart retrieved successfully');
+        console.log(result.cart);
+      } else {
+        alert('Failed to retrieve cart');
+      }
+    }
+    catch(error){
+      console.error('Error:', error);
+      alert('An error occurred while retrieving the cart');
+    }
+  }
+</script>

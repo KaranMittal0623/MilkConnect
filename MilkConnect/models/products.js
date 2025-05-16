@@ -1,12 +1,12 @@
 const mongooose = require('mongoose');
 
 const prodSchema = mongooose.Schema({
-    proName : {
+    productName : {
         type: String,
         required:true,
     },
-    proPrice : {
-        type: Number,
+    productPrice : {
+        type: String,
         required:true,
     },
     expDate : {
@@ -15,7 +15,14 @@ const prodSchema = mongooose.Schema({
     addDate : {
         type:Date,
         default:Date.now,
+    },
+    productId:{
+        type:String,
+    },
+    price:{
+        type:Number,
+        required:true,
     }
 })
 
-module.exports = mongooose.model("productInfo",prodSchema);
+module.exports = mongooose.model("productModel",prodSchema);

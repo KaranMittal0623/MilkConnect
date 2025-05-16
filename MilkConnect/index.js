@@ -14,6 +14,9 @@ app.set('view engine','ejs');
 
 const route = require('./routes/frontRoutes');
 app.use('/api/v1',route);
+app.get('/',(req,res)=>{
+    res.send("Hello");
+})
 
 const connectDB = require('./config/database');
 connectDB();

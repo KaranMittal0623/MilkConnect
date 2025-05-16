@@ -80,6 +80,7 @@
             <button id="read">Read all Users</button>
             <button id="update">Update</button>
             <button id="delete">Delete</button>
+            <button id="addProducts">Add Products to cart</button>
         </div>
     </div>
     
@@ -101,6 +102,9 @@
         
         document.getElementById('delete').addEventListener('click', () => {
             window.location.href = `${BASE_URL}/delete`; // Redirect to delete page
+        });
+        document.getElementById('addProducts').addEventListener('click', () => {
+            window.location.href = `${BASE_URL}/showProduct`; // Redirect to Products Page page
         });
     </script>
 </body>
